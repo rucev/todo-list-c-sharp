@@ -1,5 +1,24 @@
 ﻿Console.WriteLine("Hello!");
 
+var todos = new List<string>();
+
+void SeeAll()
+{
+    if (todos.Count == 0)
+    {
+        Console.WriteLine("Nothing to do.");
+    }
+    else
+    {
+        int todoNumber = 1;
+        foreach (string todo in todos)
+        {
+            Console.WriteLine($"{todoNumber}: {todo}");
+            ++todoNumber;
+        }
+    }
+}
+
 bool isRunning = true;
 
 while (isRunning)
@@ -18,7 +37,7 @@ while (isRunning)
             break;
         case "S":
         case "s":
-            Console.WriteLine("See all");
+            SeeAll();
             break;
         case "A":
         case "a":
