@@ -46,7 +46,7 @@ void RemoveTodo()
     var index = 0;
     bool isParsable = int.TryParse(userInput, out index);
 
-    while (!isParsable || index - 1 > todos.Count)
+    while (!isParsable || index > todos.Count)
     {
         Console.WriteLine("Please, select a valid option.");
         var newUserInput = Console.ReadLine();
