@@ -13,10 +13,48 @@ void SeeAll()
         int todoNumber = 1;
         foreach (string todo in todos)
         {
-            Console.WriteLine($"{todoNumber}: {todo}");
+            Console.WriteLine($"[{todoNumber}] {todo}");
             ++todoNumber;
         }
     }
+}
+
+void AddTodo()
+{
+    Console.WriteLine("What do you need to do?");
+    var userInput = Console.ReadLine();
+    if (userInput == "")
+    {
+        Console.WriteLine("Invalid Input!");
+    }
+    else
+    {
+        todos.Add(userInput);
+        Console.WriteLine("Todo added to the list!");
+    }
+}
+
+void RemoveTodo()
+{
+    Console.WriteLine("Select todo to delete:");
+    SeeAll();
+    if (todos.Count == 0)
+    {
+        return;
+    }
+    var userInput = Console.ReadLine();
+    var index = 0;
+    bool isParsable = int.TryParse(userInput, out index);
+
+    while (!isParsable || index - 1 > todos.Count)
+    {
+        Console.WriteLine("Please, select a valid option.");
+        var newUserInput = Console.ReadLine();
+        isParsable = int.TryParse(newUserInput, out index);
+    }
+    todos.RemoveAt(index - 1);
+    Console.WriteLine("Updated list:");
+    SeeAll();
 }
 
 bool isRunning = true;
@@ -41,11 +79,11 @@ while (isRunning)
             break;
         case "A":
         case "a":
-            Console.WriteLine("Add to do");
+            AddTodo();
             break;
         case "R":
         case "r":
-            Console.WriteLine("Remove to do");
+            RemoveTodo();
             break;
         default:
             Console.WriteLine("Invalid choice.");
@@ -63,7 +101,3 @@ while (isRunning)
         Console.WriteLine("Something else?");
     }
 }
-
-
-
-
